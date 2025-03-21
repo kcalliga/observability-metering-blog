@@ -1,112 +1,453 @@
 {
-    "__requires": [
+  "annotations": {
+    "list": [
       {
-        "type": "panel",
-        "id": "graph",
-        "name": "Graph",
-        "version": ""
-      },
-      {
-        "type": "panel",
-        "id": "gauge",
-        "name": "Gauge",
-        "version": ""
-      },
-      {
-        "type": "datasource",
-        "id": "prometheus",
-        "name": "Prometheus",
-        "version": "1.0.0"
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
       }
-    ],
-    "annotations": {
-      "list": [
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 3,
+  "links": [],
+  "panels": [
+    {
+      "datasource": "$prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
         {
-          "builtIn": 1,
-          "datasource": "-- Grafana --",
-          "enable": true,
-          "hide": true,
-          "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
-          "type": "dashboard"
+          "datasource": "$prometheus",
+          "editorMode": "builder",
+          "expr": "sum by (namespace)( increase(kubevirt_vmi_cpu_usage_seconds_total[$__range]) ) / 3600 * $cpuCost",
+          "instant": true,
+          "legendFormat": "{{namespace}}",
+          "range": true,
+          "refId": "A"
         }
-      ]
+      ],
+      "title": "CPU Cost (Aggregated $)",
+      "type": "barchart"
     },
-    "title": "Aggregated Customer Billing Dashboard",
-    "editable": true,
-    "graphTooltip": 0,
-    "panels": [
-      {
-        "type": "graph",
-        "title": "CPU Cost (Aggregated $)",
-        "id": 1,
-        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
-        "datasource": "$datasource",
-        "targets": [
-          {
-            "expr": "sum by (namespace)( increase(kubevirt_vmi_cpu_usage_seconds_total[$__range]) ) / 3600 * 0.05",
-            "legendFormat": "{{namespace}}",
-            "refId": "A"
+    {
+      "datasource": "$prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           }
-        ],
-        "lines": true,
-        "fill": 1
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
+        {
+          "datasource": "$prometheus",
+          "editorMode": "builder",
+          "expr": "sum by (namespace)( avg_over_time(kubevirt_vmi_memory_used_bytes[$__range]) ) * $__range_s / 3600 / (1024*1024*1024) * $memoryCost",
+          "instant": true,
+          "legendFormat": "{{namespace}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Memory Cost (Aggregated $)",
+      "type": "barchart"
+    },
+    {
+      "datasource": "$prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
+        {
+          "datasource": "$prometheus",
+          "editorMode": "builder",
+          "expr": "( sum by (namespace)( increase(kubevirt_vmi_network_receive_bytes_total[$__range]) ) + sum by (namespace)( increase(kubevirt_vmi_network_transmit_bytes_total[$__range]) ) ) / (1024*1024*1024) * $networkCost",
+          "instant": true,
+          "legendFormat": "{{namespace}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Network Cost (Aggregated $)",
+      "type": "barchart"
+    },
+    {
+      "datasource": "$prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 4,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
+        {
+          "datasource": "$prometheus",
+          "editorMode": "builder",
+          "expr": "(sum by (namespace)( increase(kubevirt_vmi_cpu_usage_seconds_total[$__range]) ) / 3600 * $cpuCost)\n+ on(namespace) group_left()\n(sum by (namespace)( avg_over_time(kubevirt_vmi_memory_used_bytes[$__range]) ) * $__range_s / 3600 / (1024*1024*1024) * $memoryCost)\n+ on(namespace) group_left()\n(\n  (\n    sum by (namespace)( increase(kubevirt_vmi_network_receive_bytes_total[$__range]) )\n    + sum by (namespace)( increase(kubevirt_vmi_network_transmit_bytes_total[$__range]) )\n  ) / (1024*1024*1024) * $networkCost\n)\n",
+          "instant": true,
+          "legendFormat": "{{namespace}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Total Aggregated Cost ($)",
+      "type": "barchart"
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": [
+    "kubevirt",
+    "cost management",
+    "aggregated",
+    "openshift"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "prometheus",
+          "value": "f9a63b71-4eef-40c8-86f0-ea07d5d4974a"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Prometheus",
+        "multi": false,
+        "name": "prometheus",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "datasource",
+        "useTags": false
       },
       {
-        "type": "graph",
-        "title": "Memory Cost (Aggregated $)",
-        "id": 2,
-        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
-        "datasource": "$datasource",
-        "targets": [
-          {
-            "expr": "sum by (namespace)( avg_over_time(kubevirt_vmi_memory_used_bytes[30m]) ) / 3600 / (1024*1024*1024) * 0.01",
-            "legendFormat": "{{namespace}}",
-            "refId": "A"
-          }
-        ],
-        "lines": true,
-        "fill": 1
+        "hide": 0,
+        "includeAll": false,
+        "label": "CPU Cost ($/CPU-hour)",
+        "multi": false,
+        "name": "cpuCost",
+        "query": "0.05",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "constant"
       },
       {
-        "type": "graph",
-        "title": "Network Cost (Aggregated $)",
-        "id": 3,
-        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
-        "datasource": "$datasource",
-        "targets": [
-          {
-            "expr": "( sum by (namespace)( increase(kubevirt_vmi_network_receive_bytes_total[$__range]) ) + sum by (namespace)( increase(kubevirt_vmi_network_transmit_bytes_total[$__range]) ) ) / (1024*1024*1024) * 0.05",
-            "legendFormat": "{{namespace}}",
-            "refId": "A"
-          }
-        ],
-        "lines": true,
-        "fill": 1
+        "hide": 0,
+        "includeAll": false,
+        "label": "Memory Cost ($/GB-hour)",
+        "multi": false,
+        "name": "memoryCost",
+        "query": "0.01",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "constant"
       },
       {
-        "type": "graph",
-        "title": "Total Aggregated Cost ($)",
-        "id": 4,
-        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
-        "datasource": "$datasource",
-        "targets": [
-          {
-            "expr": "(sum by (namespace)( increase(kubevirt_vmi_cpu_usage_seconds_total[$__range]) ) / 3600 * 0.05)\n+ on(namespace) group_left()\n(sum by (namespace)( avg_over_time(kubevirt_vmi_memory_used_bytes[30m]) ) / 3600 / (1024*1024*1024) * 0.01)\n+ on(namespace) group_left()\n(\n  (\n    sum by (namespace)( increase(kubevirt_vmi_network_receive_bytes_total[$__range]) )\n    + sum by (namespace)( increase(kubevirt_vmi_network_transmit_bytes_total[$__range]) )\n  ) / (1024*1024*1024) * 0.05\n)\n",
-            "legendFormat": "{{namespace}}",
-            "refId": "A"
-          }
-        ],
-        "lines": true,
-        "fill": 1
+        "hide": 0,
+        "includeAll": false,
+        "label": "Network Cost ($/GB)",
+        "multi": false,
+        "name": "networkCost",
+        "query": "0.05",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "constant"
       }
-    ],
-    "time": {
-      "from": "now-7d",
-      "to": "now"
-    },
-    "timezone": "browser",
-    "schemaVersion": 22,
-    "version": 1
-  }
-  
+    ]
+  },
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Aggregated Customer Billing Dashboard",
+  "uid": "aggregated-billing-no-storage",
+  "version": 1,
+  "weekStart": ""
+}
