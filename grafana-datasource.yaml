@@ -3,7 +3,7 @@ kind: GrafanaDatasource
 metadata:
   annotations:
   name: grafanadatasource-prometheus
-  namespace: monitoring
+  namespace: grafana
 spec:
   allowCrossNamespaceImport: true
   datasource:
