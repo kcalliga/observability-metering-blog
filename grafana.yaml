@@ -5,7 +5,7 @@ metadata:
     dashboards: grafana
     folders: grafana
   name: grafana
-  namespace: monitoring
+  namespace: grafana
 spec:
   config:
     auth:
